@@ -36,3 +36,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+.idea/vcs.xml
+pom.xml
+pom.xml
+src/main/java/module-info.java
+.idea/vcs.xml
