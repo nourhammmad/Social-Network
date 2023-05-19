@@ -59,4 +59,8 @@ public class Post {
     public int getId() {
         return id;
     }
+    public String getPost()
+    {
+        return content;
+    }
 }

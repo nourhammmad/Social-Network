@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: AFD3E2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.GroupController">
+   <children>
+      <AnchorPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #3A98B9;">
+         <children>
+            <Label fx:id="GroupName" layoutX="14.0" layoutY="15.0" prefHeight="70.0" prefWidth="179.0">
+               <font>
+                  <Font name="Algerian" size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="Back" layoutX="513.0" layoutY="14.0" mnemonicParsing="false" onAction="#SignOut" text="Back">
+               <font>
+                  <Font name="Algerian" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

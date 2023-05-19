@@ -1,0 +1,35 @@
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.input-field {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.primary-button {
+    -fx-background-color: #0077cc;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+.primary-button:hover {
+    -fx-background-color: #005ea6;
+}
+.scroll-pane-1 .viewport {
+    -fx-background-color: #f2f2f2;
+}
+
+.scroll-pane-2 .viewport {
+    -fx-background-color: #e6e6e6;
+}

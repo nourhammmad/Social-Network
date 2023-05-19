@@ -8,6 +8,7 @@ public class Group {
     private ArrayList<Account> members = new ArrayList<Account>();
 
     private ArrayList<Post> posts = new ArrayList<Post>();
+    public static ArrayList<Group> ListofGroups = new ArrayList<Group>();
 
     boolean isPublic;
 
@@ -17,6 +18,11 @@ public class Group {
         this.moderator = moderator;
         this.isPublic = type;
         this.gName = name;
+        if (!(moderator.role.equals("Team Leader"))) {
+
+            throw new IllegalArgumentException("Only Team Leader can create a group");
+        }
+        ListofGroups.add(this);
     }
 
     public void joinGroup(Account acc) {
@@ -56,5 +62,22 @@ public class Group {
         }
     }
 
+    static public Group FetchGroupByName(String name) {
+        for (Group group : ListofGroups) {
+            if (group.gName.equals(name)) {
+                return group;
+            }
+        }
+        return null;
+    }
 
+    static public boolean isPresent(String name) {
+        for (Group group : ListofGroups) {
+            if (group.gName.equals(name)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

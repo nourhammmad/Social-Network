@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.testingg.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.LogInPageController">
+   <children>
+      <TextField fx:id="IDText" layoutX="115.0" layoutY="81.0" promptText="ID" />
+      <PasswordField fx:id="Password" layoutX="115.0" layoutY="159.0" promptText="Password" />
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="357.0" layoutY="32.0">
+         <image>
+            <Image url="@LogInPage.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="114.0" layoutY="27.0" prefHeight="26.0" prefWidth="150.0" text="Login Page">
+         <font>
+            <Font name="Algerian" size="21.0" />
+         </font>
+      </Label>
+      <Button layoutX="154.0" layoutY="197.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="34.0" prefWidth="72.0" text="Sign In">
+         <font>
+            <Font name="Algerian" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="SignUp" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#SwitchToSignUp" prefHeight="34.0" prefWidth="72.0" text="Sign Up">
+         <font>
+            <Font name="Algerian" size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="Status" layoutX="125.0" layoutY="231.0" prefHeight="18.0" prefWidth="129.0" />
+   </children>
+</AnchorPane>

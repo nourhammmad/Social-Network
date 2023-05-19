@@ -15,7 +15,6 @@ public class Account {
 
     static ArrayList<Account> accounts = new ArrayList<Account>();
 
-
     // Todo: check creation process
     public Account(String username, String password, String role) throws IllegalArgumentException {
 
@@ -32,6 +31,13 @@ public class Account {
             throw new IllegalArgumentException("Password is weak");
 
         }
+        if (!(role.equals("Employee") || role.equals("Team Leader"))) {
+            passed = false;
+            System.out.println("Role is not chosen");
+            throw new IllegalArgumentException("Role is not chosen");
+
+        }
+
 
         if (passed) {
             System.out.println("Adding");
@@ -43,7 +49,7 @@ public class Account {
     }
 
 
-    public boolean isPresent(String username) {
+    static public boolean isPresent(String username) {
         for (Account account : accounts) {
             if (account.username.equals(username)) {
                 return true;
@@ -83,6 +89,28 @@ public class Account {
         acc.followers.add(acc);
         acc.addNotification("Friend request", "");
     }
-
+    static public Account LogIn(String id,String password)
+    {         System.out.println(id);
+        System.out.println(password);
+        for (Account account : accounts) {
+            System.out.println(account.username);
+            System.out.println(account.password);
+            if(account.username.equals(id) && account.password.equals(password))
+            {
+                return account;
+            }
+        }
+        return null;
+    }
+    static public Account  FetchAccountByUsername(String id)
+    {
+        for (Account account : accounts) {
+            if(account.username.equals(id))
+            {
+                return account;
+            }
+        }
+        return null;
+    }
 
 }
