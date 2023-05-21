@@ -11,15 +11,19 @@ public class GUIMain extends Application {
     public static Account CurrentlyLoggedIn;
     public static Group CurrentlyViewedGroup;
     public static Account CurrentlyViewedAccount;
-    public static String SearchedName;
     @Override
     public void start(Stage stage) throws IOException {
-        Account ac1=new Account("nour","123456789","Employee");
-        Account ac2=new Account("mark","123456789","Team Leader");
+        Account ac1=new Account("nour","123","Employee");
+        Account ac2=new Account("mark","123","Team Leader");
 
         Account.accounts.get(0).addFollower(Account.accounts.get(1));
         Account.accounts.get(0).addPost("sda");
-        System.out.println(Account.accounts.get(0).notifications.size());
+        for(Account acc: Account.accounts){
+            System.out.println(acc.username);
+        }
+        new Group(ac2, true, "asd").addPost(ac2, new Post("Hello First post"));
+
+        System.out.println(Account.accounts.get(1).notifications.size());
 
         FXMLLoader fxmlLoader = new FXMLLoader(GUIMain.class.getResource("LogInPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 263);

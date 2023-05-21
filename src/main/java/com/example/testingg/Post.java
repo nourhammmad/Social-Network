@@ -9,7 +9,7 @@ public class Post {
     int id;
     Account owner;
     ArrayList<String> comments = new ArrayList<String>();
-    ArrayList<Account> likers = new ArrayList<Account>();
+    int likers;
     static ArrayList<Post> posts = new ArrayList<Post>();
     String content;
 
@@ -34,10 +34,6 @@ public class Post {
         return globalID;
     }
 
-    public void addLike(Account acc) {
-        likers.add(acc);
-    }
-
     public void addComment(String comment) throws IllegalAccessError {
         if (commentsEnabled) {
             comments.add(comment);
@@ -46,13 +42,13 @@ public class Post {
         }
     }
 
+    public void addLike(){
+        likers++;
+    }
+
     public String share() {
         shares++;
         return content;
-    }
-
-    public int getTotalLikes() {
-        return likers.size();
     }
 
 

@@ -19,8 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.example.testingg.GUIMain.CurrentlyLoggedIn;
-import static com.example.testingg.GUIMain.CurrentlyViewedGroup;
+import static com.example.testingg.GUIMain.*;
 
 public class GroupController {
     @FXML
@@ -36,14 +35,16 @@ public class GroupController {
     private ScrollPane PostScrolls;
     @FXML
     private Button addPost;
+
     @FXML
     void SignOut(ActionEvent event) {
 
     }
+
     @FXML
-    void BackToHomePage(ActionEvent event)throws IOException {
+    void BackToHomePage(ActionEvent event) throws IOException {
         Parent root1 = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-        Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage appst = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene1 = new Scene(root1);
         appst.setScene(scene1);
         appst.setTitle(" ");
@@ -53,50 +54,70 @@ public class GroupController {
     @FXML
     void addPost(ActionEvent event) {
         Button button = new Button("Add Post");
-        TextField tx=new TextField();
+        TextField tx = new TextField();
         // Create a VBox layout and add the label and button to it
         VBox layout = new VBox(10);
-        layout.getChildren().addAll( tx,button);
+        layout.getChildren().addAll(tx, button);
         layout.setAlignment(Pos.CENTER);
         // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
-        button.setOnAction(events->{
-            Post pt=new Post(tx.getText());
-            Label p=new Label(CurrentlyLoggedIn.username);
+        button.setOnAction(events -> {
+            Post pt = new Post(tx.getText());
+            Label p = new Label(CurrentlyLoggedIn.username);
             p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
             PostsVB.getChildren().add(p);
-            Label po=new Label(pt.getPost());
+            Label po = new Label(pt.getPost() + " " + pt.likers);
             po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
             PostsVB.getChildren().add(po);
             Button like = new Button("Like");
+            like.setOnAction(event2 -> {
+                pt.likers++;
+                System.out.println(pt.likers);
+            });
             like.setStyle("-fx-background-color: #afd3e2;");
             PostsVB.getChildren().add(like);
-
-            Label pos=new Label("______________________________________________________________________________");
+            Label pos = new Label("______________________________________________________________________________");
             pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
             PostsVB.getChildren().add(pos);
             PostScrolls.setContent(PostsVB);
-            CurrentlyLoggedIn.addPost(pt.getPost());
-
+            CurrentlyViewedGroup.addPost(CurrentlyLoggedIn, pt);
             popUpWindow.close();
 
         });
-
         Scene scene = new Scene(layout);
         popUpWindow.setScene(scene);
-
-        // Show the pop-up window and wait for it to be closed before continuing
 
         popUpWindow.showAndWait();
 
     }
-    public void initialize(){
+
+    public void initialize() {
         gpName.setFont(Font.font("Algerian", FontWeight.BOLD, 30));
 
         gpName.setText(CurrentlyViewedGroup.gName);
+
+        for (Post post : CurrentlyViewedGroup.posts) {
+            Label p = new Label(CurrentlyLoggedIn.username);
+            p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
+            PostsVB.getChildren().add(p);
+            Label po = new Label(post.getPost() + " " + post.likers);
+            po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+            PostsVB.getChildren().add(po);
+            Button like = new Button("Like");
+            like.setOnAction(event2 -> {
+                post.likers++;
+                System.out.println(post.likers);
+            });
+            like.setStyle("-fx-background-color: #afd3e2;");
+            PostsVB.getChildren().add(like);
+            Label pos = new Label("______________________________________________________________________________");
+            pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+            PostsVB.getChildren().add(pos);
+            PostScrolls.setContent(PostsVB);
+        }
     }
 
 }

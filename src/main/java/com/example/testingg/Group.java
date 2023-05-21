@@ -7,7 +7,7 @@ public class Group {
     Account moderator;
     private ArrayList<Account> members = new ArrayList<Account>();
 
-    private ArrayList<Post> posts = new ArrayList<Post>();
+    public ArrayList<Post> posts = new ArrayList<Post>();
     public static ArrayList<Group> ListofGroups = new ArrayList<Group>();
 
     boolean isPublic;
@@ -41,9 +41,10 @@ public class Group {
         if (members.contains(acc)) {
             posts.add(post);
             for (Account account : members) {
-                account.addNotification("Group", "");
+                account.addNotification("Group", acc.username+ " added a post in a group");
             }
         }
+        posts.add(post);
     }
 
     public boolean removeUser(Account mod, Account acc) {

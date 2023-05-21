@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public class Account {
     String username, password, role;
-    ArrayList<Account> following = new ArrayList<>();
+    ArrayList<Account> friends = new ArrayList<>();
 
     ArrayList<Post> posts = new ArrayList<>();
 
     ArrayList<Notification> notifications = new ArrayList<Notification>();
     ArrayList<Group> groups = new ArrayList<>();
 
-    ArrayList<Account> followers = new ArrayList<>();
 
     static ArrayList<Account> accounts = new ArrayList<Account>();
 
@@ -25,12 +24,11 @@ public class Account {
             System.out.println("The username is already taken");
             throw new IllegalArgumentException("Username taken");
         }
-        if (!isValid(password)) {
-            passed = false;
-            System.out.println("Password is too weak");
-            throw new IllegalArgumentException("Password is weak");
-
-        }
+//        if (!isValid(password)) {
+//            passed = false;
+//            System.out.println("Password is too weak");
+//            throw new IllegalArgumentException("Password is weak");
+//        }
         if (!(role.equals("Employee") || role.equals("Team Leader"))) {
             passed = false;
             System.out.println("Role is not chosen");
@@ -66,7 +64,7 @@ public class Account {
     }
 
     public void addNotification(String category, String content) {
-        System.out.println(this.username +category+content);
+        System.out.println("Adding a notification " + this.username + category + content);
         Notification notification = new Notification(category, content);
         notifications.add(notification);
     }
@@ -74,8 +72,9 @@ public class Account {
     public Post addPost(String content) {
         Post post = new Post(content);
         posts.add(post);
-        for (Account follower : followers) {
-            follower.addNotification("Friends' post", follower.username + " added a post");
+        for (Account follower : friends) {
+            System.out.println("sending noty to follower " + follower.username);
+            follower.addNotification("Friends' post", username + " added a post");
         }
         return post;
     }
@@ -86,28 +85,27 @@ public class Account {
     }
 
     public void addFollower(Account acc) {
-        following.add(acc);
-        acc.followers.add(this);
-        acc.addNotification("Friend request", "Friend Request "+username);
+        friends.add(acc);
+        acc.friends.add(this);
+        acc.addNotification("Friend request", username + " is following you");
     }
-    static public Account LogIn(String id,String password)
-    {         System.out.println(id);
+
+    static public Account LogIn(String id, String password) {
+        System.out.println(id);
         System.out.println(password);
         for (Account account : accounts) {
             System.out.println(account.username);
             System.out.println(account.password);
-            if(account.username.equals(id) && account.password.equals(password))
-            {
+            if (account.username.equals(id) && account.password.equals(password)) {
                 return account;
             }
         }
         return null;
     }
-    static public Account  FetchAccountByUsername(String id)
-    {
+
+    static public Account FetchAccountByUsername(String id) {
         for (Account account : accounts) {
-            if(account.username.equals(id))
-            {
+            if (account.username.equals(id)) {
                 return account;
             }
         }

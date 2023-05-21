@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.AccountController">
+   <children>
+      <AnchorPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #3A98B9;">
+         <children>
+            <Button fx:id="Back" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackToHomePage" prefHeight="46.0" prefWidth="86.0" style="-fx-background-color: #3A98B9;" text="Back" textFill="#afd3e2">
+               <font>
+                  <Font name="Algerian" size="20.0" />
+               </font>
+            </Button>
+            <Label fx:id="gpName" layoutX="25.0" layoutY="17.0" prefHeight="40.0" prefWidth="163.0" />
+            <Label fx:id="accName" layoutX="25.0" layoutY="14.0" prefHeight="46.0" prefWidth="194.0" />
+         </children>
+      </AnchorPane>
+      <ScrollPane layoutY="100.0" prefHeight="499.0" prefWidth="600.0">
+         <content>
+            <VBox fx:id="PostsVB" prefHeight="499.0" prefWidth="598.0" style="-fx-background-color: AFD3E2;" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

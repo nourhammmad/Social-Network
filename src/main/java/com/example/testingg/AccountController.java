@@ -8,9 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static com.example.testingg.GUIMain.CurrentlyLoggedIn;
+import static com.example.testingg.GUIMain.CurrentlyViewedAccount;
 
 public class AccountController {
     @FXML
@@ -21,6 +25,8 @@ public class AccountController {
 
     @FXML
     private Label gpName;
+    @FXML
+    private VBox PostsVB;
 
     @FXML
     void BackToHomePage(ActionEvent event) throws IOException {
@@ -33,8 +39,9 @@ public class AccountController {
 
     }
     public void initialize() {
-
-
+        for (Post post : CurrentlyViewedAccount.posts) {
+            PostsVB.getChildren().add(new Label(post.getPost()));
+        }
 
     }
 }
