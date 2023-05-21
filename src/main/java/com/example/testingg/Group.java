@@ -22,7 +22,15 @@ public class Group {
 
             throw new IllegalArgumentException("Only Team Leader can create a group");
         }
+        for (Group group : ListofGroups) {
+            if(group.gName.equals(name))
+            {
+                throw new IllegalArgumentException("Group name already taken");
+            }
+        }
         ListofGroups.add(this);
+        moderator.groups.add(this);
+
     }
 
     public void joinGroup(Account acc) {

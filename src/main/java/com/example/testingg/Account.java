@@ -66,6 +66,7 @@ public class Account {
     }
 
     public void addNotification(String category, String content) {
+        System.out.println(this.username +category+content);
         Notification notification = new Notification(category, content);
         notifications.add(notification);
     }
@@ -86,8 +87,8 @@ public class Account {
 
     public void addFollower(Account acc) {
         following.add(acc);
-        acc.followers.add(acc);
-        acc.addNotification("Friend request", "");
+        acc.followers.add(this);
+        acc.addNotification("Friend request", "Friend Request "+username);
     }
     static public Account LogIn(String id,String password)
     {         System.out.println(id);

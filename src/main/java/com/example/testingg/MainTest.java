@@ -3,21 +3,23 @@ package com.example.testingg;//
 // (powered by FernFlower decompiler)
 //
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 class MainTest {
     MainTest() {
     }
 
-    @BeforeAll
+    @BeforeClass
     public static void printStart() {
         System.out.println("Testing Started");
     }
 
     @Test
     void test1() {
-        Assertions.assertTrue(true);
+        assertTrue(true);
     }
 }

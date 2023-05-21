@@ -11,10 +11,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" style="-fx-background-color: #53a1a7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.SignUpController">
    <children>
       <TextField fx:id="ID" layoutX="33.0" layoutY="29.0" promptText="ID" />
-      <PasswordField fx:id="pw" layoutX="33.0" layoutY="90.0" />
+      <PasswordField fx:id="pw" layoutX="33.0" layoutY="90.0" promptText="Password" />
       <ComboBox fx:id="Role" layoutX="32.0" layoutY="155.0" prefWidth="150.0" promptText="Role">
          <items>
             <FXCollections fx:factory="observableArrayList">
@@ -26,7 +26,7 @@
 
       
       <Button fx:id="Back" layoutX="34.0" layoutY="223.0" mnemonicParsing="false" onAction="#HandleBack" text="Back" />
-      <ImageView fitHeight="263.0" fitWidth="330.0" layoutX="270.0">
+      <ImageView fitHeight="263.0" fitWidth="304.0" layoutX="296.0">
          <image>
             <Image url="@SignUpPage.png" />
          </image>

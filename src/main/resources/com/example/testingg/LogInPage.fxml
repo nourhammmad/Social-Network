@@ -9,30 +9,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.LogInPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="600.0" style="-fx-background-color: #263d4a;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testingg.LogInPageController">
    <children>
-      <TextField fx:id="IDText" layoutX="115.0" layoutY="81.0" promptText="ID" />
-      <PasswordField fx:id="Password" layoutX="115.0" layoutY="159.0" promptText="Password" />
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="357.0" layoutY="32.0">
-         <image>
-            <Image url="@LogInPage.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="114.0" layoutY="27.0" prefHeight="26.0" prefWidth="150.0" text="Login Page">
+      <TextField fx:id="IDText" layoutX="93.0" layoutY="80.0" promptText="ID" />
+      <PasswordField fx:id="Password" layoutX="93.0" layoutY="158.0" promptText="Password" />
+      <Label alignment="CENTER" layoutX="92.0" layoutY="26.0" prefHeight="26.0" prefWidth="150.0" text="Login Page" textFill="#4584ab">
          <font>
             <Font name="Algerian" size="21.0" />
          </font>
       </Label>
-      <Button layoutX="154.0" layoutY="197.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="34.0" prefWidth="72.0" text="Sign In">
+      <Button layoutX="132.0" layoutY="196.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="34.0" prefWidth="72.0" style="-fx-background-color: #263d4a;" text="Sign In" textFill="#4584ab">
          <font>
             <Font name="Algerian" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="SignUp" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#SwitchToSignUp" prefHeight="34.0" prefWidth="72.0" text="Sign Up">
+      <Button fx:id="SignUp" mnemonicParsing="false" onAction="#SwitchToSignUp" prefHeight="34.0" prefWidth="72.0" style="-fx-background-color: #263d4a;" text="Sign Up" textFill="#4584ab">
          <font>
             <Font name="Algerian" size="14.0" />
          </font>
       </Button>
       <Label fx:id="Status" layoutX="125.0" layoutY="231.0" prefHeight="18.0" prefWidth="129.0" />
+      <ImageView fitHeight="263.0" fitWidth="300.0" layoutX="300.0" layoutY="-2.0">
+         <image>
+            <Image url="@LogInPagePic.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

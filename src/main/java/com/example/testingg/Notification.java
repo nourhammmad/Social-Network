@@ -7,11 +7,8 @@ public class Notification {
     String category, content;
 
     static int globalID;
-
     int id;
     Date date;
-
-
     public Notification(String category, String content) {
         this.id = globalID++;
         this.category = category;

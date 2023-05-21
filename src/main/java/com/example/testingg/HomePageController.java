@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 
 import static com.example.testingg.GUIMain.CurrentlyLoggedIn;
 import static com.example.testingg.GUIMain.CurrentlyViewedGroup;
+import static com.example.testingg.GUIMain.CurrentlyViewedAccount;
+
 
 
 public class HomePageController {
@@ -41,6 +43,18 @@ public class HomePageController {
     private Button AddPost;
     @FXML
     private ScrollPane PostScrolls;
+    @FXML
+    private VBox NotificationsVBox;
+    @FXML
+    private VBox FriendsVBox;
+    @FXML
+    private ScrollPane NotificationsScrollPane;
+    @FXML
+    private TextField SearchBar;
+
+    @FXML
+    private Label WelcomeLabel;
+
 
     @FXML
     void AddFriendPopUpWindow(ActionEvent event) {
@@ -58,6 +72,21 @@ public class HomePageController {
             if(Account.isPresent(tx.getText()))
             {
                 CurrentlyLoggedIn.addFollower(Account.FetchAccountByUsername(tx.getText()));
+                popUpWindow.close();
+                Button bt=new Button(tx.getText());
+                FriendsVBox.getChildren().add(bt);
+                bt.setOnAction(actionEvent -> {
+                    try {
+                        SwitchToAccount (Account.FetchAccountByUsername(tx.getText()),actionEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+
+
+                GroupsScroll.setContent(GroupsVBox);
+
                 popUpWindow.close();
             }
         });
@@ -106,12 +135,12 @@ public class HomePageController {
 
         Button button = new Button("Create Group");
         TextField tx=new TextField();
-        RadioButton pu=new RadioButton();
+        Label error=new Label();
         CheckBox checkBox = new CheckBox("Private?");
 
         // Create a VBox layout and add the label and button to it
         VBox layout = new VBox(10);
-        layout.getChildren().addAll( tx,button);
+        layout.getChildren().addAll( tx,checkBox,button,error);
         layout.setAlignment(Pos.CENTER);
 
         // Create a new stage for the pop-up window
@@ -120,23 +149,28 @@ public class HomePageController {
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events->{
+            try {
 
-            Group gp=new Group(CurrentlyLoggedIn,!checkBox.isSelected(),tx.getText());
-            Button bt=new Button(gp.gName);
-            GroupsVBox.getChildren().add(bt);
-            bt.setOnAction(actionEvent -> {
-                try {
-                    Switch (gp,actionEvent);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+                Group gp = new Group(CurrentlyLoggedIn, !checkBox.isSelected(), tx.getText());
+                Button bt = new Button(gp.gName);
+                GroupsVBox.getChildren().add(bt);
+                bt.setOnAction(actionEvent -> {
+                    try {
+                        SwitchToGroup(gp, actionEvent);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
 
+                GroupsScroll.setContent(GroupsVBox);
 
-            GroupsScroll.setContent(GroupsVBox);
+                popUpWindow.close();
+            }catch (Exception E)
+            {
+                error.setText(E.getMessage());
 
-            popUpWindow.close();
+            }
 
 
         });
@@ -155,7 +189,7 @@ public class HomePageController {
     @FXML
     void SignOut(ActionEvent event) throws IOException {
         CurrentlyLoggedIn=null;
-        Parent root1 = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("LogInPage.fxml"));
         Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
         Scene scene1 = new Scene(root1);
         appst.setScene(scene1);
@@ -174,19 +208,44 @@ public class HomePageController {
             GroupsVBox.getChildren().add(bt);
             bt.setOnAction(actionEvent -> {
                 try {
-                    Switch (group,actionEvent);
+                    SwitchToGroup (group,actionEvent);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
 
         }
+        for(Post post : CurrentlyLoggedIn.posts) {
+            PostsVB.getChildren().add(new Label(post.getPost()));
 
+        }
+        for(Notification notification : CurrentlyLoggedIn.notifications) {
+
+            NotificationsVBox.getChildren().add(new Label(notification.content));
+
+        }
+        for(Account following : CurrentlyLoggedIn.following) {
+
+            FriendsVBox.getChildren().add(new Label(following.username));
+
+        }
+        WelcomeLabel.setText(WelcomeLabel.getText()+ " "+CurrentlyLoggedIn.username);
         GroupsScroll.setContent(GroupsVBox);
+        NotificationsScrollPane.setContent(NotificationsVBox);
 
     }
-    public void Switch(Group gp,ActionEvent event) throws IOException{
+    public void SwitchToGroup(Group gp,ActionEvent event) throws IOException{
         CurrentlyViewedGroup=gp;
+        Parent root1 = FXMLLoader.load(getClass().getResource("GroupPage.fxml"));
+        Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
+        Scene scene1 = new Scene(root1);
+        appst.setScene(scene1);
+        appst.setTitle(" ");
+        appst.show();
+
+    }
+    public void SwitchToAccount(Account ac,ActionEvent event) throws IOException{
+        CurrentlyViewedAccount=ac;
         Parent root1 = FXMLLoader.load(getClass().getResource("GroupPage.fxml"));
         Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
         Scene scene1 = new Scene(root1);
@@ -197,7 +256,6 @@ public class HomePageController {
     }
     @FXML
     void AddPostAction(ActionEvent event) {
-        System.out.println("asdasdwqdfas");
         Button button = new Button("Add Post");
         TextField tx=new TextField();
         // Create a VBox layout and add the label and button to it
@@ -213,6 +271,8 @@ public class HomePageController {
             Post pt=new Post(tx.getText());
             PostsVB.getChildren().add(new Label(pt.getPost()));
             PostScrolls.setContent(PostsVB);
+            CurrentlyLoggedIn.addPost(pt.getPost());
+
             popUpWindow.close();
 
             });
@@ -224,6 +284,26 @@ public class HomePageController {
 
         popUpWindow.showAndWait();
 
+
+    }
+
+    @FXML
+    void Search(ActionEvent event)throws IOException {
+        String temp=SearchBar.getText();
+        for (Account account:Account.accounts)
+        {
+            if(temp.equals(account.username)) {
+                SwitchToAccount(account,event);
+                return;
+            }
+        }
+        for (Group groups:Group.ListofGroups)
+        {
+            if(temp.equals(groups.gName)) {
+                SwitchToGroup(groups,event);
+                return;
+            }
+        }
 
     }
 
