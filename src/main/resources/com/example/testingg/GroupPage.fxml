@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,17 +12,22 @@
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #3A98B9;">
          <children>
-            <Button fx:id="Back" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackToHomePage" prefHeight="46.0" prefWidth="86.0" style="-fx-background-color: #3A98B9;" text="Back" textFill="#afd3e2">
+            <Button fx:id="Back" layoutX="513.0" layoutY="2.0" mnemonicParsing="false" onAction="#BackToHomePage" prefHeight="46.0" prefWidth="86.0" style="-fx-background-color: #3A98B9;" text="Back" textFill="#afd3e2">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Button>
-            <Label fx:id="gpName" layoutX="25.0" layoutY="17.0" prefHeight="40.0" prefWidth="163.0" />
-            <Button fx:id="addPost" layoutX="464.0" layoutY="57.0" mnemonicParsing="false" onAction="#addPost" prefHeight="37.0" prefWidth="128.0" style="-fx-background-color: #3A98B9;" text="aDD post" textFill="#afd3e2">
+            <Label fx:id="gpName" layoutX="16.0" layoutY="44.0" prefHeight="40.0" prefWidth="418.0" />
+            <Button fx:id="addPost" layoutX="473.0" layoutY="45.0" mnemonicParsing="false" onAction="#addPost" prefHeight="38.0" prefWidth="125.0" style="-fx-background-color: #3A98B9;" text="aDD post" textFill="#afd3e2">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Button>
+            <Button fx:id="Remove" layoutY="7.0" mnemonicParsing="false" onAction="#RemoveUser" style="-fx-background-color: #3A98B9;" text="Remove User" textFill="#afd3e2">
+               <font>
+                  <Font name="Algerian" size="20.0" />
+               </font></Button>
+            <ComboBox fx:id="MembersCombo" layoutX="225.0" prefWidth="150.0" promptText="Members" style="-fx-background-color: #3A98B9;" />
          </children>
       </AnchorPane>
       <ScrollPane fx:id="PostScrolls" layoutY="100.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: AFD3E2;">

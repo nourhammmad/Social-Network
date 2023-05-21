@@ -109,6 +109,7 @@ public class HomePageController {
                 System.out.println("Joining " + gp.gName);
                 CurrentlyLoggedIn.joinGroup(gp);
                 Button bt = new Button(gp.gName);
+                CurrentlyViewedGroup=gp;
                 bt.setOnAction(event1 -> {
                     try {
                         SwitchToGroup(gp, event1);
@@ -272,7 +273,7 @@ public class HomePageController {
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
-            Post pt = new Post(tx.getText());
+            Post pt = new Post(tx.getText(),CurrentlyLoggedIn);
             PostsVB.getChildren().add(new Label(pt.getPost()));
             PostScrolls.setContent(PostsVB);
             CurrentlyLoggedIn.addPost(pt.getPost());

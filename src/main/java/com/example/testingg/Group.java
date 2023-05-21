@@ -14,9 +14,9 @@ public class Group {
 
     String gName;
 
-    public Group(Account moderator, boolean type, String name) {
+    public Group(Account moderator, boolean isPublic, String name) {
         this.moderator = moderator;
-        this.isPublic = type;
+        this.isPublic = isPublic;
         this.gName = name;
         if (!(moderator.role.equals("Team Leader"))) {
 
@@ -34,6 +34,11 @@ public class Group {
     }
 
     public void joinGroup(Account acc) {
+        if(!isPublic)
+        {
+            moderator.addNotification("Join Request","Join group request sent by "+acc.username);
+        }
+
         members.add(acc);
     }
 
@@ -49,14 +54,14 @@ public class Group {
 
     public boolean removeUser(Account mod, Account acc) {
         if (mod == moderator) {
-            posts.remove(acc);
+            members.remove(acc);
             return true;
         }
         return false;
     }
 
     public ArrayList<Post> getPosts(Account acc) {
-        if (isPublic || members.contains(acc)) {
+        if (isPublic || members.contains(acc) || acc==moderator) {
             return posts;
         } else {
             return null;
@@ -64,7 +69,7 @@ public class Group {
     }
 
     public ArrayList<Account> getMembers(Account acc) {
-        if (isPublic || members.contains(acc)) {
+        if (isPublic || members.contains(acc) || acc==moderator) {
             return members;
         } else {
             return null;

@@ -9,15 +9,17 @@ public class Post {
     int id;
     Account owner;
     ArrayList<String> comments = new ArrayList<String>();
-    int likers;
+    ArrayList<Account> likers=new ArrayList<Account>();
     static ArrayList<Post> posts = new ArrayList<Post>();
     String content;
+    Account PostOwner;
 
     boolean commentsEnabled;
 
-    public Post(String content) {
+    public Post(String content,Account PostOwner) {
         this.id = globalID++;
         this.content = content;
+        this.PostOwner=PostOwner;
         posts.add(this);
     }
     public static Post PostByID(int id)
@@ -42,14 +44,21 @@ public class Post {
         }
     }
 
-    public void addLike(){
-        likers++;
+    public void addLike(Account ac){
+
+        if(!likers.contains(ac))
+        {
+            if(ac!=PostOwner)
+            PostOwner.addNotification("Likes",ac.username+" liked your post");
+            likers.add(ac);
+        }
     }
 
-    public String share() {
-        shares++;
-        return content;
-    }
+
+//    public String share() {
+//        shares++;
+//        return content;
+//    }
 
 
     public int getId() {

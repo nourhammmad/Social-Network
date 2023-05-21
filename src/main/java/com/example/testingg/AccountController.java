@@ -9,12 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.example.testingg.GUIMain.CurrentlyLoggedIn;
-import static com.example.testingg.GUIMain.CurrentlyViewedAccount;
+import static com.example.testingg.GUIMain.*;
+import static com.example.testingg.GUIMain.CurrentlyViewedGroup;
 
 public class AccountController {
     @FXML
@@ -39,9 +41,35 @@ public class AccountController {
 
     }
     public void initialize() {
-        for (Post post : CurrentlyViewedAccount.posts) {
-            PostsVB.getChildren().add(new Label(post.getPost()));
-        }
+        accName.setFont(Font.font("Algerian", FontWeight.BOLD, 30));
 
+        accName.setText(CurrentlyViewedAccount.username);
+
+
+        for (Post post : CurrentlyViewedAccount.posts) {
+
+            Label p = new Label(CurrentlyViewedAccount.username);
+            p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
+            PostsVB.getChildren().add(p);
+            Label po = new Label(post.getPost() + " " );
+            Label likes=new Label();
+            po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+            PostsVB.getChildren().add(po);
+            PostsVB.getChildren().add(likes);
+            Button like = new Button("Like");
+
+            likes.setText(" "+post.likers.size());
+            like.setOnAction(event2 -> {
+                post.addLike(CurrentlyLoggedIn);
+                System.out.println(post.likers.size());
+                likes.setText(" "+post.likers.size());
+            });
+            like.setStyle("-fx-background-color: #afd3e2;");
+            PostsVB.getChildren().add(like);
+            Label pos = new Label("______________________________________________________________________________");
+            pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+            PostsVB.getChildren().add(pos);
+          //  PostScrolls.setContent(PostsVB);
+        }
     }
 }

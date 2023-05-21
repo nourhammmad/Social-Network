@@ -24,11 +24,11 @@ public class Account {
             System.out.println("The username is already taken");
             throw new IllegalArgumentException("Username taken");
         }
-//        if (!isValid(password)) {
-//            passed = false;
-//            System.out.println("Password is too weak");
-//            throw new IllegalArgumentException("Password is weak");
-//        }
+        if (!isValid(password)) {
+            passed = false;
+            System.out.println("Password is too weak");
+            throw new IllegalArgumentException("Password is weak");
+        }
         if (!(role.equals("Employee") || role.equals("Team Leader"))) {
             passed = false;
             System.out.println("Role is not chosen");
@@ -70,7 +70,7 @@ public class Account {
     }
 
     public Post addPost(String content) {
-        Post post = new Post(content);
+        Post post = new Post(content,this);
         posts.add(post);
         for (Account follower : friends) {
             System.out.println("sending noty to follower " + follower.username);

@@ -1,0 +1,51 @@
+1. TC1 test the system login with wrong credentials
+2. TC2-3-4 sign up with invalid parameters (password<8 w already taken username)(role is chosen)
+3. TC5 sign up with right parameters
+4. TC6 login with wrong credentials
+5. TC7 login with right parameters
+6. TC8 add post
+7. TC9 check if the notifications arrived to the account's friends
+8. TC10 add a friend
+9. TC11 check that the friend request is sent
+10.TC12 create a group
+11.TC13 join group
+12.TC14 if the group is private send a notification to the moderator
+13.TC15 add post in the group
+14.TC16 like added post and check that the user can like it only once
+15.TC17 check that a notification doesn't arrive if i liked my post
+16.TC18
+
+
+
+
+
+
+
+
+
+
+
+
+
+test cases
+Notifications
+1. friend request
+2. Post
+3. Groups posts
+..................
+Groups
+1. test creation
+2. view post(public and private)
+3. joining 
+4. posting
+5. removing
+..................
+search
+1. eno rah el awel lel account lama kan fi esmein
+..................
+friends
+..................
+test signing in
+..................
+likessssssssss
+el bey add post gowa el group member
