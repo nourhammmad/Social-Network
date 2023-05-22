@@ -49,7 +49,6 @@ public class Group {
         } else {
             throw new IllegalAccessException("Cannot post");
         }
-        posts.add(post);
     }
 
     public boolean removeUser(Account mod, Account acc) {
