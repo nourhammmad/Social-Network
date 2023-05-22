@@ -70,7 +70,7 @@ public class Account {
     }
 
     public Post addPost(String content) {
-        Post post = new Post(content,this);
+        Post post = new Post(content, this);
         posts.add(post);
         for (Account follower : friends) {
             System.out.println("sending noty to follower " + follower.username);

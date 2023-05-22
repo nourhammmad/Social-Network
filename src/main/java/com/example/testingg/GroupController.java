@@ -38,6 +38,7 @@ public class GroupController {
 
     @FXML
     private Button Remove;
+
     @FXML
     void SignOut(ActionEvent event) {
 
@@ -58,30 +59,28 @@ public class GroupController {
     void addPost(ActionEvent event) {
         Button button = new Button("Add Post");
         TextField tx = new TextField();
-        // Create a VBox layout and add the label and button to it
         VBox layout = new VBox(10);
         layout.getChildren().addAll(tx, button);
         layout.setAlignment(Pos.CENTER);
-        // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
-            Post pt = new Post(tx.getText(),CurrentlyLoggedIn);
+            Post pt = new Post(tx.getText(), CurrentlyLoggedIn);
             Label p = new Label(pt.PostOwner.username);
             p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
             PostsVB.getChildren().add(p);
-            Label po = new Label(pt.getPost() );
+            Label po = new Label(pt.getPost());
             po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
-            Label likes=new Label();
+            Label likes = new Label();
             PostsVB.getChildren().add(po);
             PostsVB.getChildren().add(likes);
             Button like = new Button("Like");
             like.setOnAction(event2 -> {
                 pt.addLike(CurrentlyLoggedIn);
                 System.out.println(pt.likers.size());
-                likes.setText(" "+pt.likers.size());
+                likes.setText(" " + pt.likers.size());
             });
             like.setStyle("-fx-background-color: #afd3e2;");
             PostsVB.getChildren().add(like);
@@ -99,16 +98,15 @@ public class GroupController {
         popUpWindow.showAndWait();
 
     }
+
     @FXML
     void RemoveUser(ActionEvent event) {
         Button button = new Button("Remove User");
         TextField tx = new TextField();
-        // Create a VBox layout and add the label and button to it
         VBox layout = new VBox(10);
         layout.getChildren().addAll(tx, button);
         layout.setAlignment(Pos.CENTER);
 
-        // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
         popUpWindow.setTitle("Pop-up Window");
@@ -119,17 +117,9 @@ public class GroupController {
             CurrentlyViewedGroup.removeUser(CurrentlyLoggedIn, Account.FetchAccountByUsername(tx.getText()));
             System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
             popUpWindow.close();
-        } );
-
-
-
-
-        // Set the scene for the pop-up window
+        });
         Scene scene = new Scene(layout);
         popUpWindow.setScene(scene);
-
-        // Show the pop-up window and wait for it to be closed before continuing
-
         popUpWindow.showAndWait();
 
 
@@ -137,8 +127,7 @@ public class GroupController {
 
     public void initialize() {
 
-
-        if(!(CurrentlyLoggedIn==CurrentlyViewedGroup.moderator)) {
+        if (!(CurrentlyLoggedIn == CurrentlyViewedGroup.moderator)) {
             Remove.setDisable(true);
 
         }
@@ -147,44 +136,39 @@ public class GroupController {
 
         gpName.setText(CurrentlyViewedGroup.gName);
 
-        if(CurrentlyViewedGroup.getPosts(CurrentlyLoggedIn)!=null)
-        {
-        for (Post post : CurrentlyViewedGroup.getPosts(CurrentlyLoggedIn)) {
-            Label p = new Label(CurrentlyLoggedIn.username);
-            p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
-            PostsVB.getChildren().add(p);
-            Label po = new Label(post.getPost() + " " );
-            Label likes=new Label();
-            po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
-            PostsVB.getChildren().add(po);
-            PostsVB.getChildren().add(likes);
-            Button like = new Button("Like");
+        if (CurrentlyViewedGroup.getPosts(CurrentlyLoggedIn) != null) {
+            for (Post post : CurrentlyViewedGroup.getPosts(CurrentlyLoggedIn)) {
+                Label p = new Label(post.PostOwner.username);
+                p.setFont(Font.font("Algerian", FontWeight.BOLD, 22));
+                PostsVB.getChildren().add(p);
+                Label po = new Label(post.getPost() + " ");
+                Label likes = new Label();
+                po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+                PostsVB.getChildren().add(po);
+                PostsVB.getChildren().add(likes);
+                Button like = new Button("Like");
 
-                likes.setText(" "+post.likers.size());
-            like.setOnAction(event2 -> {
-                post.addLike(CurrentlyLoggedIn);
-                System.out.println(post.likers.size());
-                if(post.likers.size()>0)
-                likes.setText(" "+post.likers.size());
-            });
-            like.setStyle("-fx-background-color: #afd3e2;");
-            PostsVB.getChildren().add(like);
-            Label pos = new Label("______________________________________________________________________________");
-            pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
-            PostsVB.getChildren().add(pos);
-            PostScrolls.setContent(PostsVB);
-        }
-        for(Account accounts:CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn))
-        {
+                likes.setText(" " + post.likers.size());
+                like.setOnAction(event2 -> {
+                    post.addLike(CurrentlyLoggedIn);
+                    System.out.println(post.likers.size());
+                    if (post.likers.size() > 0) likes.setText(" " + post.likers.size());
+                });
+                like.setStyle("-fx-background-color: #afd3e2;");
+                PostsVB.getChildren().add(like);
+                Label pos = new Label("______________________________________________________________________________");
+                pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
+                PostsVB.getChildren().add(pos);
+                PostScrolls.setContent(PostsVB);
+            }
+            for (Account accounts : CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn)) {
 
 
-            MembersCombo.getItems().add(accounts.username);
+                MembersCombo.getItems().add(accounts.username);
 
-        }
-    }
-        else
-        {
-            gpName.setText(gpName.getText()+ ": This Group is private");
+            }
+        } else {
+            gpName.setText(gpName.getText() + ": This Group is private");
             MembersCombo.setDisable(true);
         }
     }

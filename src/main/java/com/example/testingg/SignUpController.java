@@ -32,39 +32,36 @@ public class SignUpController {
     private Button SignUp;
     @FXML
     private Button Back;
+
     @FXML
-    private void handleSignUpButton(ActionEvent event)throws IOException  {
+    private void handleSignUpButton(ActionEvent event) throws IOException {
 
-       try {
-           Account ac = new Account(ID.getText(), pw.getText(), Role.getValue());
+        try {
+            Account ac = new Account(ID.getText(), pw.getText(), Role.getValue());
 
-           Parent root1 = FXMLLoader.load(getClass().getResource("LogInPage.fxml"));
-           Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
-           Scene scene1 = new Scene(root1);
-           appst.setScene(scene1);
-           appst.setTitle(" ");
-           appst.show();
+            Parent root1 = FXMLLoader.load(getClass().getResource("LogInPage.fxml"));
+            Stage appst = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene1 = new Scene(root1);
+            appst.setScene(scene1);
+            appst.setTitle(" ");
+            appst.show();
 
-       }
-       catch(Exception e)
-       {
-           if(e.getMessage()=="Password is weak")
-           {
-               error2.setText("Password is weak");
-           }else if(e.getMessage()=="Username taken")
-           {
-               error1.setText("Username taken");
-           }else
-           {
-               error3.setText("Role is not chosen");
-           }
+        } catch (Exception e) {
+            if (e.getMessage() == "Password is weak") {
+                error2.setText("Password is weak");
+            } else if (e.getMessage() == "Username taken") {
+                error1.setText("Username taken");
+            } else {
+                error3.setText("Role is not chosen");
+            }
 
-       }
+        }
     }
+
     @FXML
     void HandleBack(ActionEvent event) throws IOException {
         Parent root1 = FXMLLoader.load(getClass().getResource("LogInPage.fxml"));
-        Stage appst=(Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage appst = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene1 = new Scene(root1);
         appst.setScene(scene1);
         appst.setTitle(" ");

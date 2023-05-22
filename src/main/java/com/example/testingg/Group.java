@@ -23,8 +23,7 @@ public class Group {
             throw new IllegalArgumentException("Only Team Leader can create a group");
         }
         for (Group group : ListofGroups) {
-            if(group.gName.equals(name))
-            {
+            if (group.gName.equals(name)) {
                 throw new IllegalArgumentException("Group name already taken");
             }
         }
@@ -34,19 +33,19 @@ public class Group {
     }
 
     public void joinGroup(Account acc) {
-        if(!isPublic)
-        {
-            moderator.addNotification("Join Request","Join group request sent by "+acc.username);
+        if (!isPublic) {
+            moderator.addNotification("Join Request", "Join group request sent by " + acc.username);
         }
 
         members.add(acc);
     }
 
+    //TODO: throw error when non member adds post
     public void addPost(Account acc, Post post) {
         if (members.contains(acc)) {
             posts.add(post);
             for (Account account : members) {
-                account.addNotification("Group", acc.username+ " added a post in a group");
+                account.addNotification("Group", acc.username + " added a post in a group");
             }
         }
         posts.add(post);
@@ -61,7 +60,7 @@ public class Group {
     }
 
     public ArrayList<Post> getPosts(Account acc) {
-        if (isPublic || members.contains(acc) || acc==moderator) {
+        if (isPublic || members.contains(acc) || acc == moderator) {
             return posts;
         } else {
             return null;
@@ -69,7 +68,7 @@ public class Group {
     }
 
     public ArrayList<Account> getMembers(Account acc) {
-        if (isPublic || members.contains(acc) || acc==moderator) {
+        if (isPublic || members.contains(acc) || acc == moderator) {
             return members;
         } else {
             return null;

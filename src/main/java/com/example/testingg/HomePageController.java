@@ -89,8 +89,7 @@ public class HomePageController {
     }
 
     @FXML
-    void AddGroupPopUpWindow(ActionEvent event) throws IOException{
-
+    void AddGroupPopUpWindow(ActionEvent event) throws IOException {
         Button button = new Button("Join Group");
         TextField tx = new TextField();
         // Create a VBox layout and add the label and button to it
@@ -109,7 +108,7 @@ public class HomePageController {
                 System.out.println("Joining " + gp.gName);
                 CurrentlyLoggedIn.joinGroup(gp);
                 Button bt = new Button(gp.gName);
-                CurrentlyViewedGroup=gp;
+                CurrentlyViewedGroup = gp;
                 bt.setOnAction(event1 -> {
                     try {
                         SwitchToGroup(gp, event1);
@@ -122,12 +121,8 @@ public class HomePageController {
             }
         });
 
-
-        // Set the scene for the pop-up window
         Scene scene = new Scene(layout);
         popUpWindow.setScene(scene);
-
-        // Show the pop-up window and wait for it to be closed before continuing
 
         popUpWindow.showAndWait();
     }
@@ -140,12 +135,10 @@ public class HomePageController {
         Label error = new Label();
         CheckBox checkBox = new CheckBox("Private?");
 
-        // Create a VBox layout and add the label and button to it
         VBox layout = new VBox(10);
         layout.getChildren().addAll(tx, checkBox, button, error);
         layout.setAlignment(Pos.CENTER);
 
-        // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
         popUpWindow.setTitle("Pop-up Window");
@@ -222,13 +215,18 @@ public class HomePageController {
 
         }
         for (Notification notification : CurrentlyLoggedIn.notifications) {
-
             NotificationsVBox.getChildren().add(new Label(notification.content));
-
         }
         for (Account following : CurrentlyLoggedIn.friends) {
-
-            FriendsVBox.getChildren().add(new Label(following.username));
+            Button bt = new Button(following.username);
+            FriendsVBox.getChildren().add(bt);
+            bt.setOnAction(actionEvent -> {
+                try {
+                    SwitchToAccount(following, actionEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
         }
         WelcomeLabel.setText(WelcomeLabel.getText() + " " + CurrentlyLoggedIn.username);
@@ -273,7 +271,7 @@ public class HomePageController {
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
-            Post pt = new Post(tx.getText(),CurrentlyLoggedIn);
+            Post pt = new Post(tx.getText(), CurrentlyLoggedIn);
             PostsVB.getChildren().add(new Label(pt.getPost()));
             PostScrolls.setContent(PostsVB);
             CurrentlyLoggedIn.addPost(pt.getPost());

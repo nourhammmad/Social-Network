@@ -9,23 +9,23 @@ public class Post {
     int id;
     Account owner;
     ArrayList<String> comments = new ArrayList<String>();
-    ArrayList<Account> likers=new ArrayList<Account>();
+    ArrayList<Account> likers = new ArrayList<Account>();
     static ArrayList<Post> posts = new ArrayList<Post>();
     String content;
     Account PostOwner;
 
     boolean commentsEnabled;
 
-    public Post(String content,Account PostOwner) {
+    public Post(String content, Account PostOwner) {
         this.id = globalID++;
         this.content = content;
-        this.PostOwner=PostOwner;
+        this.PostOwner = PostOwner;
         posts.add(this);
     }
-    public static Post PostByID(int id)
-    {
+
+    public static Post PostByID(int id) {
         for (Post posts : posts) {
-            if (posts.getId()==id) {
+            if (posts.getId() == id) {
                 return posts;
             }
         }
@@ -44,12 +44,11 @@ public class Post {
         }
     }
 
-    public void addLike(Account ac){
+    public void addLike(Account ac) {
 
-        if(!likers.contains(ac))
-        {
-            if(ac!=PostOwner)
-            PostOwner.addNotification("Likes",ac.username+" liked your post");
+        if (!likers.contains(ac)) {
+            if (ac != PostOwner)
+                PostOwner.addNotification("Likes", ac.username + " liked your post");
             likers.add(ac);
         }
     }
@@ -64,8 +63,8 @@ public class Post {
     public int getId() {
         return id;
     }
-    public String getPost()
-    {
+
+    public String getPost() {
         return content;
     }
 }
