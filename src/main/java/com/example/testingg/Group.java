@@ -54,6 +54,7 @@ public class Group {
     public boolean removeUser(Account mod, Account acc) {
         if (mod == moderator) {
             members.remove(acc);
+            acc.groups.remove(this);
             return true;
         }
         return false;

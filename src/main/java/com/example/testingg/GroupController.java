@@ -73,7 +73,7 @@ public class GroupController {
             PostsVB.getChildren().add(p);
             Label po = new Label(pt.getPost());
             po.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
-            Label likes = new Label();
+            Label likes = new Label("0");
             PostsVB.getChildren().add(po);
             PostsVB.getChildren().add(likes);
             Button like = new Button("Like");
