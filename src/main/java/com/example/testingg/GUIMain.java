@@ -17,13 +17,16 @@ public class GUIMain extends Application {
         Account ac1 = new Account("nour", "123456789", "Employee");
         Account ac2 = new Account("mark", "123456789", "Team Leader");
         Account account = new Account("NourHammad", "1234567890", "Employee");
-        Account account2 = new Account("koko", "123456789", "Employee");
         Account.accounts.get(0).addFollower(Account.accounts.get(1));
         Account.accounts.get(0).addPost("sda");
         for (Account acc : Account.accounts) {
             System.out.println(acc.username);
         }
-        new Group(ac2, false, "asd").addPost(ac2, new Post("Hello First post", Account.accounts.get(1)));
+        try {
+            new Group(ac2, false, "asd").addPost(ac2, new Post("Hello First post",ac2));
+        } catch (IllegalAccessException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println(Account.accounts.get(1).notifications.size());
 

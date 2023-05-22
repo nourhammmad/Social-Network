@@ -56,7 +56,7 @@ public class GroupController {
     }
 
     @FXML
-    void addPost(ActionEvent event) {
+    void addPost(ActionEvent event) throws IOException{
         Button button = new Button("Add Post");
         TextField tx = new TextField();
         VBox layout = new VBox(10);
@@ -88,7 +88,11 @@ public class GroupController {
             pos.setFont(Font.font("Algerian", FontWeight.BOLD, 16));
             PostsVB.getChildren().add(pos);
             PostScrolls.setContent(PostsVB);
-            CurrentlyViewedGroup.addPost(CurrentlyLoggedIn, pt);
+            try {
+                CurrentlyViewedGroup.addPost(CurrentlyLoggedIn, pt);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());;
+            }
             popUpWindow.close();
 
         });
@@ -112,7 +116,6 @@ public class GroupController {
         popUpWindow.setTitle("Pop-up Window");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
-
             System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
             CurrentlyViewedGroup.removeUser(CurrentlyLoggedIn, Account.FetchAccountByUsername(tx.getText()));
             System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());

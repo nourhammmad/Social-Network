@@ -40,13 +40,14 @@ public class Group {
         members.add(acc);
     }
 
-    //TODO: throw error when non member adds post
-    public void addPost(Account acc, Post post) {
+    public void addPost(Account acc, Post post) throws IllegalAccessException {
         if (members.contains(acc)) {
             posts.add(post);
             for (Account account : members) {
                 account.addNotification("Group", acc.username + " added a post in a group");
             }
+        } else {
+            throw new IllegalAccessException("Cannot post");
         }
         posts.add(post);
     }
