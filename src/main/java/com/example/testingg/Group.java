@@ -41,7 +41,7 @@ public class Group {
     }
 
     public void addPost(Account acc, Post post) throws IllegalAccessException {
-        if (members.contains(acc)) {
+        if (members.contains(acc) || acc == moderator) {
             posts.add(post);
             for (Account account : members) {
                 account.addNotification("Group", acc.username + " added a post in a group");
