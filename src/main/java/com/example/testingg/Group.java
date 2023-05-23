@@ -44,9 +44,13 @@ public class Group {
         if (members.contains(acc) || acc == moderator) {
             posts.add(post);
             for (Account account : members) {
-                account.addNotification("Group", acc.username + " added a post in a group");
+                if(account != acc){
+                    account.addNotification("Group", acc.username + " added a post in a group");
+                }
             }
-            moderator.addNotification("Group", acc.username + " added a post in a group");
+            if(moderator != acc){
+                moderator.addNotification("Group", acc.username + " added a post in a group");
+            }
         } else {
             throw new IllegalAccessException("Cannot post");
         }
