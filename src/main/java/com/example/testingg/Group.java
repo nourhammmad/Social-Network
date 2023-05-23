@@ -6,10 +6,8 @@ public class Group {
 
     Account moderator;
     private ArrayList<Account> members = new ArrayList<Account>();
-
     public ArrayList<Post> posts = new ArrayList<Post>();
     public static ArrayList<Group> ListofGroups = new ArrayList<Group>();
-
     boolean isPublic;
 
     String gName;

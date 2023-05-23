@@ -36,7 +36,6 @@ class AccountTest {
 
     @Test
     void add_Notification_Test() {
-        account.addNotification("", "");
         int before = account.notifications.size();
         account.addNotification("Friend", "You got a new friend");
         int after = account.notifications.size();
