@@ -46,6 +46,7 @@ public class Group {
             for (Account account : members) {
                 account.addNotification("Group", acc.username + " added a post in a group");
             }
+            moderator.addNotification("Group", acc.username + " added a post in a group");
         } else {
             throw new IllegalAccessException("Cannot post");
         }
