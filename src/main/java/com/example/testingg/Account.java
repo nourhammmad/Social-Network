@@ -14,7 +14,7 @@ public class Account {
 
     static ArrayList<Account> accounts = new ArrayList<Account>();
 
-    // Todo: check creation process
+    // Todo: remove FetchAccountByUsername
     public Account(String username, String password, String role) throws IllegalArgumentException {
 
         boolean passed = true;
