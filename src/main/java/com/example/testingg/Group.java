@@ -99,4 +99,13 @@ public class Group {
         }
         return false;
     }
+    public boolean isPresentMember(String name) {
+        for (Account acc : members) {
+            if (acc.username.equals(name)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

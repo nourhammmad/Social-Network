@@ -85,9 +85,10 @@ public class Account {
     }
 
     public void addFollower(Account acc) {
-        friends.add(acc);
-        acc.friends.add(this);
-        acc.addNotification("Friend request", username + " is following you");
+
+                friends.add(acc);
+                acc.friends.add(this);
+                acc.addNotification("Friend request", username + " is following you");
     }
 
     static public Account LogIn(String id, String password) {

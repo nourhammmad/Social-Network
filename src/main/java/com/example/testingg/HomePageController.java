@@ -55,17 +55,20 @@ public class HomePageController {
     void AddFriendPopUpWindow(ActionEvent event) {
         Button button = new Button("Add Friend");
         TextField tx = new TextField();
+        Label txerr = new Label();
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(tx, button);
+        layout.getChildren().addAll(tx, txerr,button);
         layout.setAlignment(Pos.CENTER);
 
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
-        popUpWindow.setTitle("Pop-up Window");
+        popUpWindow.setTitle("Add a Friend");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
             if (Account.isPresent(tx.getText())) {
+                int size1=CurrentlyLoggedIn.friends.size();
                 CurrentlyLoggedIn.addFollower(Account.FetchAccountByUsername(tx.getText()));
+                int size2=CurrentlyLoggedIn.friends.size();
                 popUpWindow.close();
                 Button bt = new Button(tx.getText());
                 FriendsVBox.getChildren().add(bt);
@@ -81,6 +84,10 @@ public class HomePageController {
                 GroupsScroll.setContent(GroupsVBox);
 
                 popUpWindow.close();
+            }
+            else
+            {
+                txerr.setText("username not found");
             }
         });
         Scene scene = new Scene(layout);
@@ -100,7 +107,7 @@ public class HomePageController {
         // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
-        popUpWindow.setTitle("Pop-up Window");
+        popUpWindow.setTitle("Join A Group");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
             if (Group.isPresent(tx.getText())) {
@@ -141,7 +148,7 @@ public class HomePageController {
 
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
-        popUpWindow.setTitle("Pop-up Window");
+        popUpWindow.setTitle("Create A Groups");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
             try {
@@ -268,7 +275,7 @@ public class HomePageController {
         // Create a new stage for the pop-up window
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
-        popUpWindow.setTitle("Pop-up Window");
+        popUpWindow.setTitle("Add A Post");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
             Post pt = new Post(tx.getText(), CurrentlyLoggedIn);

@@ -16,7 +16,8 @@ import java.io.IOException;
 
 import static com.example.testingg.GUIMain.CurrentlyLoggedIn;
 
-public class LogInPageController {
+public class
+LogInPageController {
 
     @FXML
     private TextField IDText;

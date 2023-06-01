@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import static com.example.testingg.GUIMain.*;
 
-public class GroupController {
+public class    GroupController {
     @FXML
     private Button Back;
 
@@ -107,19 +107,25 @@ public class GroupController {
     void RemoveUser(ActionEvent event) {
         Button button = new Button("Remove User");
         TextField tx = new TextField();
+        Label r=new Label();
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(tx, button);
+        layout.getChildren().addAll(tx,r, button);
         layout.setAlignment(Pos.CENTER);
 
         Stage popUpWindow = new Stage();
         popUpWindow.initModality(Modality.APPLICATION_MODAL);
-        popUpWindow.setTitle("Pop-up Window");
+        popUpWindow.setTitle("Remove a Member");
         popUpWindow.setMinWidth(250);
         button.setOnAction(events -> {
-            System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
-            CurrentlyViewedGroup.removeUser(CurrentlyLoggedIn, Account.FetchAccountByUsername(tx.getText()));
-            System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
-            popUpWindow.close();
+            if(CurrentlyViewedGroup.isPresentMember(tx.getText())) {
+                System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
+                boolean rem = CurrentlyViewedGroup.removeUser(CurrentlyLoggedIn, Account.FetchAccountByUsername(tx.getText()));
+                System.out.println(CurrentlyViewedGroup.getMembers(CurrentlyLoggedIn).size());
+                popUpWindow.close();
+            }
+            else {
+                r.setText("username not found");
+            }
         });
         Scene scene = new Scene(layout);
         popUpWindow.setScene(scene);
