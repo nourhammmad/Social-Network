@@ -14,9 +14,11 @@ public class GroupTest {
     private Group group;
     private Account test;
 
-    /** Clean-up Testing objects **/
+    /**
+     * Clean-up Testing objects
+     **/
     @After
-    public void deleteObjects(){
+    public void deleteObjects() {
         Account.accounts.remove(moderator);
         Account.accounts.remove(member);
         Account.accounts.remove(test);
@@ -24,8 +26,8 @@ public class GroupTest {
     }
 
     @Before
-    public void createObjects(){
-        moderator = new Account("Modeer","123456789","Team Leader");
+    public void createObjects() {
+        moderator = new Account("Modeer", "123456789", "Team Leader");
         member = new Account("3abdo", "king12345678", "Employee");
         group = new Group(moderator, false, "El Qorob");
         test = new Account("king", "123456789", "Employee");
@@ -33,10 +35,10 @@ public class GroupTest {
     }
 
     @Test
-    public void group_constructor_invalidrole_test(){
+    public void group_constructor_invalidrole_test() {
         // A group can only be created by an account holding the team leader role
         IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Group(test,false, "test group");
+            new Group(test, false, "test group");
         }, "IllegalArgumentException was expected");
 
         Assertions.assertEquals("Only Team Leader can create a group", thrown.getMessage());
@@ -44,16 +46,19 @@ public class GroupTest {
     }
 
     @Test
-    public void group_constructor_alreadyexists_test(){
-        assertThrows(IllegalArgumentException.class, ()->{new Group(moderator,false, "El Qorob");});
+    public void group_constructor_alreadyexists_test() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Group(moderator, false, "El Qorob");
+        });
     }
+
     @Test
     public void joinGroup_Test() {
         group.joinGroup(member);
         // Check a correct notification is sent to the moderator
         Notification not = moderator.notifications.get(0);
         assertEquals("Join Request", not.category);
-        assertEquals("Join group request sent by "+member.username, not.content);
+        assertEquals("Join group request sent by " + member.username, not.content);
 
         // Check member is correctly added to members list of group
         assertNotNull(group.getMembers(moderator));
@@ -108,7 +113,7 @@ public class GroupTest {
     public void fetchGroupByName() {
         assertNotNull(Group.FetchGroupByName("El Qorob"));
         // Both groups have the same moderator
-        assertSame(this.moderator ,Group.FetchGroupByName("El Qorob").moderator);
+        assertSame(this.moderator, Group.FetchGroupByName("El Qorob").moderator);
     }
 
     @Test
@@ -118,5 +123,10 @@ public class GroupTest {
 
     public void isPresent_False_test() {
         assertTrue(Group.isPresent("ONC-ASU"));
+    }
+
+    @Test
+    public void isPresentMember() {
+        assertTrue(group.isPresentMember(member.username));
     }
 }

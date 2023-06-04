@@ -3,21 +3,16 @@ package com.example.testingg;
 import java.util.ArrayList;
 
 public class Post {
-    int shares;
-
-    static int globalID;
+    static private int globalID;
     int id;
-    Account owner;
-    ArrayList<String> comments = new ArrayList<String>();
     ArrayList<Account> likers = new ArrayList<Account>();
     static ArrayList<Post> posts = new ArrayList<Post>();
     String content;
     Account PostOwner;
 
-    boolean commentsEnabled;
 
     public Post(String content, Account PostOwner) {
-        this.id = globalID++;
+        this.id = ++globalID;
         this.content = content;
         this.PostOwner = PostOwner;
         posts.add(this);
@@ -36,14 +31,6 @@ public class Post {
         return globalID;
     }
 
-    public void addComment(String comment) throws IllegalAccessError {
-        if (commentsEnabled) {
-            comments.add(comment);
-        } else {
-            throw new IllegalAccessError();
-        }
-    }
-
     public void addLike(Account ac) {
 
         if (!likers.contains(ac)) {
@@ -54,17 +41,15 @@ public class Post {
     }
 
 
-//    public String share() {
-//        shares++;
-//        return content;
-//    }
-
-
     public int getId() {
         return id;
     }
 
     public String getPost() {
         return content;
+    }
+
+    public int getLikes(){
+        return likers.size();
     }
 }

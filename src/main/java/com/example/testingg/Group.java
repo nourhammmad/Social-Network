@@ -44,11 +44,11 @@ public class Group {
         if (members.contains(acc) || acc == moderator) {
             posts.add(post);
             for (Account account : members) {
-                if(account != acc){
+                if (account != acc) {
                     account.addNotification("Group", acc.username + " added a post in a group");
                 }
             }
-            if(moderator != acc){
+            if (moderator != acc) {
                 moderator.addNotification("Group", acc.username + " added a post in a group");
             }
         } else {
@@ -99,6 +99,7 @@ public class Group {
         }
         return false;
     }
+
     public boolean isPresentMember(String name) {
         for (Account acc : members) {
             if (acc.username.equals(name)) {
