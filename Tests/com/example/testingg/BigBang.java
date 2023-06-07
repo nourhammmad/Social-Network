@@ -21,13 +21,13 @@ public class BigBang {
         int beforeFollow = employeeLoggedIn.notifications.size();
         leaderLoggedIn.addFollower(employeeLoggedIn);
         int afterFollow = employeeLoggedIn.notifications.size();
-        assertEquals(1,afterFollow-beforeFollow);
+        assertEquals(1, afterFollow - beforeFollow);
 
         // Check Add Post Notification
         int beforePost = employeeLoggedIn.notifications.size();
         Post post = leaderLoggedIn.addPost("Hello there");
         int afterPost = employeeLoggedIn.notifications.size();
-        assertEquals(1,afterPost-beforePost);
+        assertEquals(1, afterPost - beforePost);
 
         // Check Private Group Access
         Group.FetchGroupByName("Private Group");
@@ -37,7 +37,7 @@ public class BigBang {
         int beforeJoin = leaderLoggedIn.notifications.size();
         employeeLoggedIn.joinGroup(grp);
         int afterJoin = leaderLoggedIn.notifications.size();
-        assertEquals(1,afterJoin-beforeJoin);
+        assertEquals(1, afterJoin - beforeJoin);
 
         // Check Private Group Access
         assertNotNull(grp.getPosts(employeeLoggedIn));
@@ -45,14 +45,14 @@ public class BigBang {
 
         // Check Add Group Post Notification
         int beforeGroupPost = employeeLoggedIn.notifications.size();
-        Post Gpost = new Post("First Group Post",leaderLoggedIn);
+        Post Gpost = new Post("First Group Post", leaderLoggedIn);
         try {
-            grp.addPost(leaderLoggedIn,Gpost);
+            grp.addPost(leaderLoggedIn, Gpost);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
         int afterGroupPost = employeeLoggedIn.notifications.size();
-        assertEquals(1,afterGroupPost-beforeGroupPost);
+        assertEquals(1, afterGroupPost - beforeGroupPost);
 
         // Check Like And Notification
         int notiID = Gpost.addLike(employeeLoggedIn);
@@ -61,21 +61,21 @@ public class BigBang {
 
         // Check Add Group Post Notification By Member
         int beforeGroupPost2 = leaderLoggedIn.notifications.size();
-        Post Gpost2 = new Post("Second Group Post",employeeLoggedIn);
+        Post Gpost2 = new Post("Second Group Post", employeeLoggedIn);
         try {
-            grp.addPost(employeeLoggedIn,Gpost2);
+            grp.addPost(employeeLoggedIn, Gpost2);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
         int afterGroupPost2 = leaderLoggedIn.notifications.size();
-        assertEquals(1,afterGroupPost2-beforeGroupPost2);
+        assertEquals(1, afterGroupPost2 - beforeGroupPost2);
 
         // Check Remove User
         int beforeRemove = employeeLoggedIn.groups.size();
         grp.removeUser(leaderLoggedIn, employeeLoggedIn);
-        ArrayList <Account> members = grp.getMembers(leaderLoggedIn);
+        ArrayList<Account> members = grp.getMembers(leaderLoggedIn);
         boolean flag = false;
-        for(int i = 0; i< members.size();i++){
+        for (int i = 0; i < members.size(); i++) {
             if (members.get(i).equals(employeeLoggedIn)) {
                 flag = true;
                 break;
@@ -85,7 +85,7 @@ public class BigBang {
 
         // Check Number of Joined Groups
         int afterRemove = employeeLoggedIn.groups.size();
-        assertEquals(1,beforeRemove-afterRemove);
+        assertEquals(1, beforeRemove - afterRemove);
     }
 
     @Test
