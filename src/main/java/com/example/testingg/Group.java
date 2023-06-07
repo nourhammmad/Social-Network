@@ -56,6 +56,7 @@ public class Group {
         }
     }
 
+    //TODO: make it throw an exception
     public boolean removeUser(Account mod, Account acc) {
         if (mod == moderator) {
             members.remove(acc);

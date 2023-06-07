@@ -63,10 +63,11 @@ public class Account {
         return false;
     }
 
-    public void addNotification(String category, String content) {
+    public int addNotification(String category, String content) {
         System.out.println("Adding a notification " + this.username + category + content);
         Notification notification = new Notification(category, content);
         notifications.add(notification);
+        return notification.id;
     }
 
     public Post addPost(String content) {
@@ -91,12 +92,16 @@ public class Account {
                 acc.addNotification("Friend request", username + " is following you");
     }
 
+    public boolean checkNotification(int id){
+        boolean check = false;
+        for (Notification notification: notifications) {
+            check = notification.id == id;
+        }
+        return check;
+    }
+
     static public Account LogIn(String id, String password) {
-        System.out.println(id);
-        System.out.println(password);
         for (Account account : accounts) {
-            System.out.println(account.username);
-            System.out.println(account.password);
             if (account.username.equals(id) && account.password.equals(password)) {
                 return account;
             }
@@ -112,5 +117,6 @@ public class Account {
         }
         return null;
     }
+
 
 }

@@ -31,13 +31,15 @@ public class Post {
         return globalID;
     }
 
-    public void addLike(Account ac) {
-
+    public int addLike(Account ac) {
         if (!likers.contains(ac)) {
-            if (ac != PostOwner)
-                PostOwner.addNotification("Likes", ac.username + " liked your post");
-            likers.add(ac);
+            if (ac != PostOwner) {
+                int id = PostOwner.addNotification("Likes", ac.username + " liked your post");
+                likers.add(ac);
+                return id;
+            }
         }
+        return 0;
     }
 
 
@@ -49,7 +51,7 @@ public class Post {
         return content;
     }
 
-    public int getLikes(){
+    public int getLikes() {
         return likers.size();
     }
 }
