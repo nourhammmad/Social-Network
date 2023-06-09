@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class AccountTest {
     private Account account;
-
     @Before
     public void instantiateObjects() {
         account = new Account("Ahmed", "Wael12345678", "Employee");
@@ -75,10 +74,11 @@ public class AccountTest {
     @Test
     public void addFollower_Test() {
         // Adding only 1 friend
-        Account test_friend = new Account("TestAccount", "waelwael123", "Employee");
+        Account test_friend = new Account("testing account", "1234567890", "Employee");
         account.addFollower(test_friend);
         // Check if friend is added successfully
         assertEquals(test_friend.username, account.friends.get(0).username);
+        Account.accounts.remove(test_friend);
         test_friend = null;
     }
 

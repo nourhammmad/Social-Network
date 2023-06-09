@@ -21,7 +21,7 @@ public class Account {
 
         if (isPresent(username)) {
             passed = false;
-            System.out.println("The username is already taken");
+            System.out.println("The username is already taken: " + username);
             throw new IllegalArgumentException("Username taken");
         }
         if (!isValid(password)) {
