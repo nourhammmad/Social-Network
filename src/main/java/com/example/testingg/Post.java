@@ -32,14 +32,14 @@ public class Post {
     }
 
     public int addLike(Account ac) {
+        int id = 0;
         if (!likers.contains(ac)) {
             if (ac != PostOwner) {
-                int id = PostOwner.addNotification("Likes", ac.username + " liked your post");
-                likers.add(ac);
-                return id;
+                id = PostOwner.addNotification("Likes", ac.username + " liked your post");
             }
+            likers.add(ac);
         }
-        return 0;
+        return id;
     }
 
 
