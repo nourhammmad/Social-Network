@@ -41,8 +41,8 @@ public class PostTest {
 
     @Test
     public void addLike_test() {
-        Account tester = new Account ("Shafiqa", "1234567890", "Employee");
-        Account liker = new Account ("El nafas el merta7", "1234567890", "Employee");
+        Account tester = new Account ("Post Owner", "1234567890", "Employee");
+        Account liker = new Account ("Liker", "1234567890", "Employee");
         Post post = new Post("This is a testing post ", tester);
         int before, after;
         before = post.getLikes();

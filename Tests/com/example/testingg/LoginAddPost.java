@@ -14,4 +14,5 @@ public class LoginAddPost {
         int id = Post.getGlobalID();
         assertEquals(id, pt.getId());
     }
+
 }
